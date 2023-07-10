@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'encyclopedia/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div class="row">
+            <div class="sidebar col-lg-2 col-md-3" style="padding: 25px">
+                <a href = "{% url 'index' %}">
+                    <img class="logo" src="https://logos-world.net/wp-content/uploads/2020/09/Wikipedia-Emblem-700x394.png" alt="Wikipedia Logo" width="220 px" height="125 px" >
+                </a><br><br>
+
+                <form action = "{% url 'search' %}" method="GET">
+                <input class="search" type="text" name="q" placeholder="Search Encyclopedia" style = "border-radius: 5px; border: 1px solid #ccc ; padding: 5px 10px">
+                </form><br>
+
+                <div>
+                    <a href="{% url 'index' %}">Home</a>
+                </div><br>
+
+                <div>
+                    <a href="{% url 'newpage' %}">Create New Page</a>
+                </div><br>
+
+                <div>
+                    <a href="{% url 'random' %}">Random Page</a>
+                </div>
+                {% block nav %}
+                {% endblock %}
+            </div>
+
+            <div class="main col-lg-10 col-md-9" style="padding: 25px">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </body>
+</html>
