@@ -1,0 +1,30 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    {{category}}
+{% endblock %}
+
+{% block body %}
+    <h2>{{category}}</h2>
+    <br>
+    <ul class="list-group" style="width: 50%">
+        {% for listing in listings %}
+            <li class="list-group-item">
+                <a href="{% url 'listing' listing.id %}">{{ listing.title }}</a>
+                {% if listing.winner %}
+                    <span class="badge badge-success">Sold</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    
+    {% if listings|length == 0 %}
+    <div class="alert alert-info" role="alert" style="width: 50%">
+        No listings in this category.
+    </div>
+    {% endif %}
+    
+    <br>
+    <a href="{% url 'categories' %}" class="btn btn-primary">Back</a>
+    
+{% endblock %}
